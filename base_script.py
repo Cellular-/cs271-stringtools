@@ -12,15 +12,19 @@ def setup():
 def stats():
     filenames = setup()
 
-    for filename in filenames:
-        with open(filename, "r") as text_file:
-            for line in text_file:
-                for word in split_line(line):
-                    fc = first_char(remove_spec_chars(word))
-                    if fc in alphabet:
-                        frequencies[fc] += 1
+    with open("output/concatenation.txt", "w") as concat_file:
+        for filename in filenames:
+            with open(filename, "r") as text_file:
+                for line in text_file:
+                    concat_file.write(line)
+                    for word in split_line(line):
+                        fc = first_char(remove_spec_chars(word))
+                        if fc in alphabet:
+                            frequencies[fc] += 1
 
-        write_frequencies(filename)
+            concat_file.write("\n")
+
+            write_frequencies(filename)
 
 def print_frequencies():
     for k, v in frequencies.items():
