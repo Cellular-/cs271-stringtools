@@ -16,9 +16,16 @@ def stats():
                 if fc in alphabet:
                     frequencies[fc] += 1
 
+    write_frequencies()
+
 def print_frequencies():
     for k, v in frequencies.items():
         print(k, v, "\n")
+
+def write_frequencies():
+    with open("output/stats.txt", "w") as file:
+        for k, v in frequencies.items():
+            file.write(f"{k} - {v}\n")
 
 def split_line(line):
     return line.split(" ")
