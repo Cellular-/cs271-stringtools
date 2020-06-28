@@ -32,7 +32,7 @@ def print_frequencies():
 
 def write_frequencies(filename):
     filename = filename.replace(".txt", "")
-    with open(f"output/{filename}-stats.txt", "w") as file:
+    with open(f"output/{filename}_stats.txt", "w") as file:
         for k, v in frequencies.items():
             file.write(f"{k} - {v}\n")
 
