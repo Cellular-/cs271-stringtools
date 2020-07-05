@@ -48,4 +48,12 @@ def first_char(string):
 def edit_distance(word1, word2):
     return editdistance.eval(word1, word2)
 
+def test_edit_distance():
+    word1 = "hello"
+    word2 = "helo"
+
+    return edit_distance(word1, word2) == 1
+
+
+
 stats()
