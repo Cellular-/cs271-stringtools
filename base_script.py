@@ -79,6 +79,15 @@ def test_edit_distance():
     return edit_distance(word1, word2) == 1
 
 def edit_distance_analysis():
+    """
+    Creates word pairs for each word in the words.txt file.
+    Then, it calculates the edit distance between the two words
+    and returns the result.
+
+    Uses the combinations of words not the permutations since edit
+    distance doesn't care about the order of the words, just the 
+    unique pairs.
+    """
     words = []
     
     with open("words.txt", "r") as word_file:
@@ -88,9 +97,34 @@ def edit_distance_analysis():
     results = {}
 
     for pair in list(itertools.combinations(words, 2)):
-        results[pair[0] + "-" + pair[1]] = edit_distance(pair[0], pair[1])
+        results[pair[0] + "/" + pair[1]] = edit_distance(pair[0], pair[1])
 
     return results
 
+def test_edit_distance_analysis():
+    """
+    Tests the function to ensure that the correct number
+    of edit distances had been calculated for the list of words.
+
+    It is easy to determine how many pairs there should be given
+    a number of items and can thus be used to validate that the
+    number of pairs is equal to the number of lines written in the
+    output file of the edit distance analysis.
+    """
+
+    count = 0
+    words = []
+    with open("words.txt", "r") as word_file:
+        for word in word_file:
+            count += 1
+            words.append(word)
+
+    output_lines_count = 0
+    with open("output/words_edit_distances.txt", "r") as file:
+        output_lines_count = len(file.readlines())
+
+    return (count * (count - 1)) / 2 == len(list(itertools.combinations(words, 2)))
+
 main()
 edit_distance_analysis()
+print(test_edit_distance_analysis())
