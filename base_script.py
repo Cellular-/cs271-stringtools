@@ -1,4 +1,4 @@
-import re, glob, os
+import re, glob, os, editdistance
 
 alphabet = 'abcdefghijklmnopqrstuvwxyz'
 frequencies = {}
@@ -44,5 +44,8 @@ def remove_spec_chars(string):
 
 def first_char(string):
     return string[:1].lower()
+
+def edit_distance(word1, word2):
+    return editdistance.eval(word1, word2)
 
 stats()
